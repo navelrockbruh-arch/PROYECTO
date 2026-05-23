@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCII DOOM</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    color:#00ff00;
+    font-family:monospace;
+}
+
+canvas{
+    display:block;
+    width:100vw;
+    height:100vh;
+}
+
+#hud{
+    position:absolute;
+    top:10px;
+    left:10px;
+    border:1px solid #00ff00;
+    padding:10px;
+    background:rgba(0,0,0,0.5);
+}
+</style>
+</head>
+<body>
+
+<div id="hud">
+WASD = mover<br>
+← → = girar<br>
+ESPACIO = disparar<br>
+ENEMIGOS: <span id="count"></span>
+</div>
+
+<canvas id="game"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+const chars = " .:-=+*#%@";
+
+const map = [
+"################",
+"#..............#",
+"#..............#",
+"#......##......#",
+"#..............#",
+"#....#.........#",
+"#..............#",
+"#..............#",
+"################"
+];
+
+const player = {
+    x:3,
+    y:3,
+    angle:0
+};
+
+const enemies = [
+    {x:8, y:5, alive:true},
+    {x:12, y:6, alive:true},
+    {x:10, y:2, alive:true}
+];
+
+const bullets = [];
+
+const keys = {};
+
+const fov = Math.PI/3;
+const depth = 16;
+
+window.addEventListener("keydown", e => {
+    keys[e.key] = true;
+
+    if(e.code === "Space"){
+        shoot();
+    }
+});
+
+window.addEventListener("keyup", e => {
+    keys[e.key] = false;
+});
+
+function shoot(){
+
+    bullets.push({
+        x:player.x,
+        y:player.y,
+        dx:Math.cos(player.angle)*0.25,
+        dy:Math.sin(player.angle)*0.25,
+        life:60
+    });
+}
+
+function movePlayer(){
+
+    const speed = 0.08;
+
+    if(keys["ArrowLeft"]) player.angle -= 0.05;
+    if(keys["ArrowRight"]) player.angle += 0.05;
+
+    let mx = 0;
+    let my = 0;
+
+    if(keys["w"]){
+        mx += Math.cos(player.angle)*speed;
+        my += Math.sin(player.angle)*speed;
+    }
+
+    if(keys["s"]){
+        mx -= Math.cos(player.angle)*speed;
+        my -= Math.sin(player.angle)*speed;
+    }
+
+    if(keys["a"]){
+        mx += Math.cos(player.angle-Math.PI/2)*speed;
+        my += Math.sin(player.angle-Math.PI/2)*speed;
+    }
+
+    if(keys["d"]){
+        mx += Math.cos(player.angle+Math.PI/2)*speed;
+        my += Math.sin(player.angle+Math.PI/2)*speed;
+    }
+
+    let nx = player.x + mx;
+    let ny = player.y + my;
+
+    if(map[Math.floor(ny)][Math.floor(nx)] !== "#"){
+        player.x = nx;
+        player.y = ny;
+    }
+}
+
+function updateBullets(){
+
+    bullets.forEach((b, index) => {
+
+        b.x += b.dx;
+        b.y += b.dy;
+        b.life--;
+
+        if(
+            map[Math.floor(b.y)][Math.floor(b.x)] === "#"
+            || b.life <= 0
+        ){
+            bullets.splice(index,1);
+            return;
+        }
+
+        enemies.forEach(enemy => {
+
+            if(!enemy.alive) return;
+
+            let dx = enemy.x - b.x;
+            let dy = enemy.y - b.y;
+
+            let dist = Math.sqrt(dx*dx + dy*dy);
+
+            if(dist < 0.4){
+                enemy.alive = false;
+                bullets.splice(index,1);
+            }
+        });
+    });
+}
+
+function drawWalls(){
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.font = "12px monospace";
+
+    for(let x=0; x<canvas.width; x+=8){
+
+        let rayAngle =
+            (player.angle - fov/2)
+            + (x/canvas.width)*fov;
+
+        let distance = 0;
+        let hit = false;
+
+        let eyeX = Math.cos(rayAngle);
+        let eyeY = Math.sin(rayAngle);
+
+        while(!hit && distance < depth){
+
+            distance += 0.05;
+
+            let testX = Math.floor(player.x + eyeX*distance);
+            let testY = Math.floor(player.y + eyeY*distance);
+
+            if(
+                testY < 0 ||
+                testY >= map.length ||
+                testX < 0 ||
+                testX >= map[0].length
+            ){
+                hit = true;
+                distance = depth;
+            }
+            else if(map[testY][testX] === "#"){
+                hit = true;
+            }
+        }
+
+        let wallHeight = canvas.height / distance;
+
+        let shadeIndex = Math.floor(
+            (1 - distance/depth)*(chars.length-1)
+        );
+
+        if(shadeIndex < 0) shadeIndex = 0;
+
+        let symbol = chars[shadeIndex];
+
+        for(let y=0; y<canvas.height; y+=12){
+
+            if(
+                y > canvas.height/2-wallHeight/2 &&
+                y < canvas.height/2+wallHeight/2
+            ){
+                ctx.fillStyle = "#00ff00";
+                ctx.fillText(symbol, x, y);
+            }
+            else if(y >= canvas.height/2+wallHeight/2){
+                ctx.fillStyle = "#003300";
+                ctx.fillText(".", x, y);
+            }
+        }
+    }
+}
+
+function drawEnemies(){
+
+    enemies.forEach(enemy => {
+
+        if(!enemy.alive) return;
+
+        let dx = enemy.x - player.x;
+        let dy = enemy.y - player.y;
+
+        let distance = Math.sqrt(dx*dx + dy*dy);
+
+        let angleToEnemy =
+            Math.atan2(dy,dx) - player.angle;
+
+        while(angleToEnemy < -Math.PI)
+            angleToEnemy += Math.PI*2;
+
+        while(angleToEnemy > Math.PI)
+            angleToEnemy -= Math.PI*2;
+
+        if(Math.abs(angleToEnemy) < fov/2){
+
+            let size = 400 / distance;
+
+            let screenX =
+                (angleToEnemy + fov/2)
+                / fov * canvas.width;
+
+            ctx.fillStyle = "red";
+            ctx.font = size + "px monospace";
+            ctx.fillText("@", screenX, canvas.height/2);
+        }
+    });
+}
+
+function drawBullets(){
+
+    bullets.forEach(b => {
+
+        let dx = b.x - player.x;
+        let dy = b.y - player.y;
+
+        let distance = Math.sqrt(dx*dx + dy*dy);
+
+        let angle =
+            Math.atan2(dy,dx) - player.angle;
+
+        if(Math.abs(angle) < fov/2){
+
+            let x =
+                (angle + fov/2)
+                / fov * canvas.width;
+
+            ctx.fillStyle = "yellow";
+            ctx.font = "20px monospace";
+            ctx.fillText("*", x, canvas.height/2);
+        }
+    });
+}
+
+function drawCrosshair(){
+
+    ctx.fillStyle = "white";
+    ctx.font = "30px monospace";
+    ctx.fillText("+", canvas.width/2, canvas.height/2);
+}
+
+function loop(){
+
+    movePlayer();
+    updateBullets();
+
+    drawWalls();
+    drawEnemies();
+    drawBullets();
+    drawCrosshair();
+
+    document.getElementById("count").textContent =
+        enemies.filter(e => e.alive).length;
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+
+window.addEventListener("resize", () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+});
+</script>
+
+</body>
+</html>

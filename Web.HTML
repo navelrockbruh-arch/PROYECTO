@@ -1,0 +1,187 @@
+<!-- WEB.HTML -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Desarrollo Web</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f0f0f;
+    color:white;
+}
+
+header{
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#111;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    border:1px solid white;
+    padding:10px 20px;
+}
+
+.hero{
+    height:60vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero h2{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#bbb;
+}
+
+.lesson{
+    padding:80px 50px;
+}
+
+.dark{
+    background:#181818;
+}
+
+.lesson h3{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.lesson p{
+    margin-bottom:20px;
+    color:#ccc;
+}
+
+code{
+    display:block;
+    background:black;
+    color:#00ffcc;
+    padding:20px;
+    margin-top:20px;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 30px;
+    border:none;
+    background:white;
+    color:black;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+    <h1>Desarrollo Web</h1>
+
+    <a href="index.html">
+        Volver
+    </a>
+
+</header>
+
+<section class="hero">
+
+    <h2>
+        Aprende HTML, CSS y JavaScript
+    </h2>
+
+    <p>
+        Aprende a crear páginas modernas e interactivas.
+    </p>
+
+</section>
+
+<section class="lesson">
+
+    <h3>
+        HTML
+    </h3>
+
+    <p>
+        HTML crea la estructura de una página.
+    </p>
+
+<code>
+&lt;h1&gt;Hola Mundo&lt;/h1&gt;
+</code>
+
+</section>
+
+<section class="lesson dark">
+
+    <h3>
+        CSS
+    </h3>
+
+    <p>
+        CSS añade colores y diseño.
+    </p>
+
+<code>
+body{
+    background:black;
+    color:white;
+}
+</code>
+
+</section>
+
+<section class="lesson">
+
+    <h3>
+        JavaScript
+    </h3>
+
+    <p>
+        JavaScript añade interactividad.
+    </p>
+
+<code>
+alert("Hola");
+</code>
+
+<button id="demoBtn">
+    Probar Demo
+</button>
+
+</section>
+
+<script>
+
+const btn = document.getElementById("demoBtn");
+
+btn.addEventListener("click", ()=>{
+
+    alert("JavaScript funcionando correctamente");
+
+});
+
+</script>
+
+</body>
+</html>

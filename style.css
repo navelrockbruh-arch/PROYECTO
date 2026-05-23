@@ -1,0 +1,359 @@
+/* styles.css */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f0f0f;
+    color:white;
+}
+
+/* HEADER */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 50px;
+    background:#111;
+    border-bottom:1px solid #222;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo h1{
+    font-size:28px;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#ccc;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+    background:linear-gradient(to bottom,#111,#1a1a1a);
+}
+
+.hero-content{
+    max-width:700px;
+}
+
+.hero h2{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#bbb;
+    margin-bottom:30px;
+    font-size:18px;
+}
+
+.hero button{
+    padding:15px 30px;
+    background:white;
+    color:black;
+    border:none;
+    cursor:pointer;
+}
+
+/* SECTION */
+
+.section{
+    padding:90px 50px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+    font-size:40px;
+}
+
+.dark-section{
+    background:#151515;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#1e1e1e;
+    border:1px solid #333;
+    padding:30px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:white;
+}
+
+.card i{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#bbb;
+    margin-bottom:20px;
+}
+
+.card button{
+    padding:12px 20px;
+    border:none;
+    background:white;
+    color:black;
+    cursor:pointer;
+}
+
+/* LECCION */
+
+#contenido-leccion{
+    max-width:900px;
+    margin:auto;
+}
+
+.lesson-box,
+.welcome-box{
+    background:#1f1f1f;
+    padding:40px;
+    border:1px solid #333;
+}
+
+.lesson-box h3{
+    margin-bottom:20px;
+    font-size:35px;
+}
+
+.lesson-box p{
+    color:#ccc;
+    margin-bottom:20px;
+}
+
+.lesson-box code{
+    display:block;
+    background:black;
+    padding:20px;
+    color:#00ffcc;
+    overflow:auto;
+    margin-top:20px;
+}
+
+/* DEMOS */
+
+.demo-container{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.demo-box{
+    background:#1f1f1f;
+    padding:30px;
+    width:320px;
+    border:1px solid #333;
+}
+
+.mini-screen{
+    width:120px;
+    height:180px;
+    background:black;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:5px;
+    padding:10px;
+}
+
+.block{
+    width:20px;
+    height:20px;
+    background:white;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0.3;
+    }
+}
+
+/* PACMAN */
+
+.pacman-demo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin:25px 0;
+}
+
+.pacman{
+    width:50px;
+    height:50px;
+    background:white;
+    border-radius:50%;
+    clip-path:polygon(100% 50%,0 0,0 100%);
+    animation:eat 0.3s infinite alternate;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    background:#999;
+    border-radius:50%;
+}
+
+@keyframes eat{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(20deg);
+    }
+}
+
+/* SOCIALS */
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.socials a{
+    text-decoration:none;
+    color:white;
+    padding:15px 25px;
+    border:1px solid #444;
+}
+
+.socials a:hover{
+    background:white;
+    color:black;
+}
+
+/* HELP */
+
+.help-box{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+}
+
+.help-box p{
+    margin-bottom:20px;
+}
+
+.help-box ul{
+    list-style:none;
+    margin-bottom:30px;
+}
+
+.help-box li{
+    margin:10px 0;
+}
+
+.help-box button{
+    padding:15px 30px;
+    border:none;
+    background:white;
+    color:black;
+    cursor:pointer;
+}
+
+/* FORM */
+
+.review-form{
+    max-width:700px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.review-form input,
+.review-form textarea{
+    padding:15px;
+    background:#1f1f1f;
+    border:1px solid #444;
+    color:white;
+}
+
+.review-form textarea{
+    height:180px;
+    resize:none;
+}
+
+.review-form button{
+    padding:15px;
+    background:white;
+    color:black;
+    border:none;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    padding:30px;
+    text-align:center;
+    background:#111;
+    border-top:1px solid #222;
+    color:#888;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    header{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h2{
+        font-size:38px;
+    }
+    .section-title{
+        font-size:30px;
+    }

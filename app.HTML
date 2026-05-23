@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Apps Modernas</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f0f0f;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    background:#111;
+    border-bottom:1px solid #222;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+header h1{
+    font-size:28px;
+}
+
+header a{
+    text-decoration:none;
+    color:white;
+    border:1px solid white;
+    padding:10px 20px;
+    transition:0.3s;
+}
+
+header a:hover{
+    background:white;
+    color:black;
+}
+
+/* HERO */
+
+.hero{
+    min-height:60vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+    background:linear-gradient(to bottom,#111,#181818);
+}
+
+.hero h2{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#bbb;
+    max-width:700px;
+    line-height:1.6;
+}
+
+/* SECTION */
+
+.app-section{
+    padding:80px 40px;
+}
+
+.dark{
+    background:#181818;
+}
+
+.section-title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+/* CARDS */
+
+.cards{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+    margin-top:40px;
+}
+
+.card{
+    width:280px;
+    background:#1f1f1f;
+    border:1px solid #333;
+    padding:30px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:white;
+}
+
+.card h4{
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.card p{
+    color:#bbb;
+    line-height:1.5;
+}
+
+/* CODE */
+
+.code-box{
+    max-width:700px;
+    margin:30px auto;
+    background:black;
+    border:1px solid #333;
+    padding:20px;
+    overflow:auto;
+    color:#00ffcc;
+    border-radius:10px;
+}
+
+/* BUTTON */
+
+.center{
+    text-align:center;
+}
+
+button{
+    padding:15px 30px;
+    border:none;
+    background:white;
+    color:black;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+    border-radius:5px;
+}
+
+button:hover{
+    opacity:0.8;
+    transform:scale(1.03);
+}
+
+/* DASHBOARD */
+
+.demo-ui{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-top:50px;
+}
+
+.demo-box{
+    width:260px;
+    background:#111;
+    border:1px solid #333;
+    padding:25px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.demo-box:hover{
+    transform:translateY(-5px);
+    border-color:white;
+}
+
+.demo-box h3{
+    margin-bottom:15px;
+}
+
+.demo-box p{
+    color:#aaa;
+    margin-bottom:20px;
+}
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress{
+    width:0%;
+    height:100%;
+    background:white;
+    transition:1.2s;
+}
+
+/* NOTIFICATION */
+
+.notification{
+    position:fixed;
+    right:30px;
+    bottom:30px;
+    background:white;
+    color:black;
+    padding:20px 25px;
+    border-radius:10px;
+    font-weight:bold;
+    transform:translateX(400px);
+    transition:0.5s;
+    z-index:2000;
+}
+
+.notification.show{
+    transform:translateX(0);
+}
+
+/* DOOM DEMO */
+
+.doom-container{
+    width:900px;
+    max-width:100%;
+    height:450px;
+    margin:50px auto;
+    background:black;
+    position:relative;
+    overflow:hidden;
+    border:2px solid #333;
+    border-radius:10px;
+}
+
+.sky{
+    position:absolute;
+    width:100%;
+    height:50%;
+    background:linear-gradient(to bottom,#222,#444);
+}
+
+.floor{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:50%;
+    background:linear-gradient(to top,#111,#222);
+    transform:perspective(500px) rotateX(70deg);
+    transform-origin:bottom;
+}
+
+.enemy{
+    position:absolute;
+    width:90px;
+    height:130px;
+    background:white;
+    left:50%;
+    top:180px;
+    transform:translateX(-50%);
+    border-radius:10px;
+    transition:0.2s;
+}
+
+.weapon{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120px;
+    height:120px;
+    background:#ddd;
+    clip-path:polygon(
+        20% 100%,
+        80% 100%,
+        100% 20%,
+        70% 0,
+        30% 0,
+        0 20%
+    );
+}
+
+.crosshair{
+    position:absolute;
+    width:30px;
+    height:30px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+.crosshair::before,
+.crosshair::after{
+    content:'';
+    position:absolute;
+    background:white;
+}
+
+.crosshair::before{
+    width:2px;
+    height:30px;
+    left:14px;
+}
+
+.crosshair::after{
+    width:30px;
+    height:2px;
+    top:14px;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:30px;
+    text-align:center;
+    background:#111;
+    border-top:1px solid #222;
+    color:#888;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    header{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .hero h2{
+        font-size:38px;
+    }
+
+    .section-title{
+        font-size:32px;
+    }
+
+    .app-section{
+        padding:70px 20px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+    <h1>
+        Apps Modernas
+    </h1>
+
+    <a href="index.html">
+        Volver
+    </a>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h2>
+        Diseño Moderno y Minimalista
+    </h2>
+
+    <p>
+        Aprende a crear dashboards, interfaces oscuras,
+        componentes modernos y videojuegos interactivos.
+    </p>
+
+</section>
+
+<!-- CARDS -->
+
+<section class="app-section">
+
+    <h2 class="section-title">
+        Componentes Modernos
+    </h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h4>
+                Dashboard
+            </h4>
+
+            <p>
+                Panel administrativo oscuro y elegante.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h4>
+                UI Oscura
+            </h4>
+
+            <p>
+                Interfaces modernas con tonos fríos.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h4>
+                Animaciones
+            </h4>
+
+            <p>
+                Transiciones suaves y efectos visuales.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CODE -->
+
+<section class="app-section dark">
+
+    <h2 class="section-title">
+        Código Moderno
+    </h2>
+
+<div class="code-box">
+button{
+    background:white;
+    color:black;
+    border:none;
+}
+</div>
+
+<div class="center">
+
+    <button id="appBtn">
+        Activar Sistema
+    </button>
+
+</div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="app-section">
+
+    <h2 class="section-title">
+        Dashboard Interactivo
+    </h2>
+
+    <div class="demo-ui">
+
+        <div class="demo-box">
+
+            <h3>
+                Rendimiento
+            </h3>
+
+            <p>
+                Optimización general.
+            </p>
+
+            <div class="progress-bar">
+
+                <div class="progress" id="progress1"></div>
+
+            </div>
+
+        </div>
+
+        <div class="demo-box">
+
+            <h3>
+                Seguridad
+            </h3>
+
+            <p>
+                Protección del sistema.
+            </p>
+
+            <div class="progress-bar">
+
+                <div class="progress" id="progress2"></div>
+
+            </div>
+
+        </div>
+
+        <div class="demo-box">
+
+            <h3>
+                Fluidez UI
+            </h3>
+
+            <p>
+                Rendimiento visual.
+            </p>
+
+            <div class="progress-bar">
+
+                <div class="progress" id="progress3"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DOOM -->
+
+<section class="app-section dark">
+
+    <h2 class="section-title">
+        Demo 3D Tipo DOOM
+    </h2>
+
+    <div class="doom-container">
+
+        <div class="sky"></div>
+
+        <div class="floor"></div>
+
+        <div class="enemy" id="enemy"></div>
+
+        <div class="weapon"></div>
+
+        <div class="crosshair"></div>
+
+    </div>
+
+    <div class="controls">
+
+        <button id="startDoom">
+            Iniciar Demo
+        </button>
+
+        <button id="shootBtn">
+            Disparar
+        </button>
+
+    </div>
+
+</section>
+
+<!-- NOTIFICATION -->
+
+<div class="notification" id="notification">
+
+    Sistema Activado
+
+</div>
+
+<footer>
+
+    © 2026 Apps Modernas
+
+</footer>
+
+<script>
+
+/* =========================
+   DASHBOARD
+========================= */
+
+const appBtn =
+document.getElementById("appBtn");
+
+const notification =
+document.getElementById("notification");
+
+appBtn.addEventListener("click", ()=>{
+
+    notification.classList.add("show");
+
+    document.getElementById("progress1")
+    .style.width = "92%";
+
+    document.getElementById("progress2")
+    .style.width = "87%";
+
+    document.getElementById("progress3")
+    .style.width = "96%";
+
+    setTimeout(()=>{
+
+        notification.classList.remove("show");
+
+    },3000);
+
+});
+
+/* =========================
+   DOOM DEMO
+========================= */
+
+const enemy =
+document.getElementById("enemy");
+
+const startDoom =
+document.getElementById("startDoom");
+
+const shootBtn =
+document.getElementById("shootBtn");
+
+let moveInterval;
+
+startDoom.addEventListener("click", ()=>{
+
+    clearInterval(moveInterval);
+
+    moveInterval = setInterval(()=>{
+
+        const randomX =
+        Math.floor(Math.random()*700);
+
+        enemy.style.left =
+        randomX + "px";
+
+    },700);
+
+});
+
+shootBtn.addEventListener("click", ()=>{
+
+    enemy.style.background = "red";
+
+    setTimeout(()=>{
+
+        enemy.style.background = "white";
+
+    },200);
+
+});
+
+</script>
+
+</body>
+</html>

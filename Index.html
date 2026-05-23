@@ -1,0 +1,321 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CodeHelp Studio</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://kit.fontawesome.com/7a4b62b0a4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        <h1>CodeHelp Studio</h1>
+    </div>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#lecciones">Lecciones</a>
+        <a href="#demostraciones">Demos</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#ayuda">Ayuda</a>
+        <a href="#resenas">Reseñas</a>
+    </nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <h2>
+            Aprende Programación y Desarrollo Digital
+        </h2>
+
+        <p>
+            Aprende mediante ejemplos reales, demostraciones visuales
+            y mini proyectos interactivos.
+        </p>
+
+        <button id="explorarBtn">
+            Explorar Lecciones
+        </button>
+
+    </div>
+
+</section>
+
+<!-- LECCIONES -->
+
+<section class="section" id="lecciones">
+
+    <h2 class="section-title">
+        Lecciones de Programación
+    </h2>
+
+    <div class="cards">
+
+        <!-- WEB -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-code"></i>
+
+            <h3>
+                Desarrollo Web
+            </h3>
+
+            <p>
+                Aprende HTML, CSS y JavaScript desde cero.
+            </p>
+
+            <button onclick="abrirLeccion('web')">
+              <a href="web.html">Abrir Lección</a>
+            </button>
+        </div>
+
+        <!-- JUEGOS -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-gamepad"></i>
+
+            <h3>
+                Creación de Juegos
+            </h3>
+
+            <p>
+                Aprende a crear juegos como Tetris o Pac-Man.
+            </p>
+
+            <button>
+                <a href="juegos.html">Abrir Lección</a>
+            </button>
+
+        </div>
+
+        <!-- APPS -->
+
+        <div class="card">
+
+            <i class="fa-solid fa-mobile-screen"></i>
+
+            <h3>
+                Aplicaciones Modernas
+            </h3>
+
+            <p>
+                Aprende interfaces modernas y minimalistas.
+            </p>
+
+            <button onclick="abrirLeccion('apps')">
+                <a href="apps.html">Abrir Lección</a>
+        
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTENIDO DINAMICO -->
+
+<section class="section dark-section">
+
+    <h2 class="section-title">
+        Zona de Lecciones
+    </h2>
+
+    <div id="contenido-leccion">
+
+        <div class="welcome-box">
+
+            <h3>
+                Selecciona una Lección
+            </h3>
+
+            <p>
+                Elige una categoría para ver tutoriales,
+                ejemplos y demostraciones.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DEMOS -->
+
+<section class="section" id="demostraciones">
+
+    <h2 class="section-title">
+        Demostraciones
+    </h2>
+
+    <div class="demo-container">
+
+        <!-- TETRIS -->
+
+        <div class="demo-box">
+
+            <h3>
+                Mini Tetris
+            </h3>
+
+            <div class="mini-screen">
+
+                <div class="block"></div>
+                <div class="block"></div>
+                <div class="block"></div>
+                <div class="block"></div>
+
+            </div>
+
+            <p>
+                Animación inspirada en Tetris.
+            </p>
+
+        </div>
+
+        <!-- PACMAN -->
+
+        <div class="demo-box">
+
+            <h3>
+                Mini Pac-Man
+            </h3>
+
+            <div class="pacman-demo">
+
+                <div class="pacman"></div>
+
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+
+            </div>
+
+            <p>
+                Ejemplo simple de animaciones.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACTO -->
+
+<section class="section dark-section" id="contacto">
+
+    <h2 class="section-title">
+        Contacto
+    </h2>
+
+    <div class="socials">
+
+        <a href="#">
+            <i class="fa-brands fa-facebook"></i>
+            Facebook
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-discord"></i>
+            Discord
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-github"></i>
+            GitHub
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-youtube"></i>
+            YouTube
+        </a>
+
+    </div>
+
+</section>
+
+<!-- AYUDA -->
+
+<section class="section" id="ayuda">
+
+    <h2 class="section-title">
+        Ayuda al Consumidor
+    </h2>
+
+    <div class="help-box">
+
+        <p>
+            Podemos ayudarte con:
+        </p>
+
+        <ul>
+
+            <li>Errores en HTML</li>
+            <li>Problemas con CSS</li>
+            <li>Ayuda con JavaScript</li>
+            <li>Creación de videojuegos</li>
+            <li>Diseño minimalista</li>
+
+        </ul>
+
+        <button>
+            Solicitar Ayuda
+        </button>
+
+    </div>
+
+</section>
+
+<!-- RESEÑAS -->
+
+<section class="section dark-section" id="resenas">
+
+    <h2 class="section-title">
+        Propuestas y Reseñas
+    </h2>
+
+    <form class="review-form">
+
+        <input type="text" placeholder="Tu nombre">
+
+        <textarea placeholder="Escribe tu propuesta o reseña"></textarea>
+
+        <button type="submit">
+            Enviar
+        </button>
+
+    </form>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 CodeHelp Studio
+    </p>
+
+</footer>
+
+<script src="Ani.JS"></script>
+
+
+</body>
+</html>
